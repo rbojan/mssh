@@ -1,0 +1,15 @@
+# mssh
+#
+# mssh aka. multi-ssh is a lightweight script to execute ssh commands 
+# in parallel on multiple hosts
+#
+mssh_config_path=./.mssh
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+for server in $(cat "$mssh_config_path"); do
+  (printf "== begin connection to ${GREEN}$server${NC}\n"; \
+   ssh $server "$@" 2>&1 | sed -e "s/^/$server: /"; \
+   printf "== end connection to ${GREEN}$server${NC}\n";) &
+done
+wait # until all subshells finish
+echo "== all connections done"
