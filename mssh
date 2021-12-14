@@ -3,6 +3,11 @@
 # mssh aka. multi-ssh is a lightweight script to execute ssh commands 
 # in parallel on multiple hosts
 #
+# Install/update ($MSSH_DIR must be in your $PATH):
+#
+# $ export MSSH_DIR=~/bin
+# $ curl -sSfL https://raw.githubusercontent.com/rbojan/mssh/main/mssh -o $MSSH_DIR/mssh
+# $ chmod +x $MSSH_DIR/mssh
 mssh_config_path=./.mssh
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
