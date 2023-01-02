@@ -8,13 +8,16 @@
 # $ export MSSH_DIR=~/bin
 # $ curl -sSfL https://raw.githubusercontent.com/rbojan/mssh/main/mssh -o $MSSH_DIR/mssh
 # $ chmod +x $MSSH_DIR/mssh
-mssh_config_path=./.mssh
+
+mssh_file=FOO="${VARIABLE:-./.mssh}
+
 GREEN='\033[0;32m'
-NC='\033[0m' # No Color
-for server in $(cat "$mssh_config_path"); do
-  (printf "== begin connection to ${GREEN}$server${NC}\n"; \
+NO_COLOR='\033[0m'
+
+for server in $(cat "$mssh_file"); do
+  (printf "== begin connection to ${GREEN}$server${NO_COLOR}\n"; \
    ssh $server "$@" 2>&1 | sed -e "s/^/$server: /"; \
-   printf "== end connection to ${GREEN}$server${NC}\n";) &
+   printf "== end connection to ${GREEN}$server${NO_COLOR}\n";) &
 done
 wait # until all subshells finish
 echo "== all connections done"
