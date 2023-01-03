@@ -1,6 +1,6 @@
 # mssh
 #
-# mssh aka. multi-ssh is a lightweight script to execute ssh commands 
+# mssh aka. multi-ssh is a lightweight script to execute ssh commands
 # in parallel on multiple hosts
 #
 # Install/update ($MSSH_DIR must be in your $PATH):
@@ -9,13 +9,14 @@
 # $ curl -sSfL https://raw.githubusercontent.com/rbojan/mssh/main/mssh -o $MSSH_DIR/mssh
 # $ chmod +x $MSSH_DIR/mssh
 
-mssh_file=FOO="${VARIABLE:-./.mssh}
+mssh_file="${MSSH_FILE:-/.mssh}"
 
+YELLOW='\033[33m'
 GREEN='\033[0;32m'
 NO_COLOR='\033[0m'
 
 for server in $(cat "$mssh_file"); do
-  (printf "== begin connection to ${GREEN}$server${NO_COLOR}\n"; \
+  (printf "== begin connection to ${YELLOW}$server${NO_COLOR}\n"; \
    ssh $server "$@" 2>&1 | sed -e "s/^/$server: /"; \
    printf "== end connection to ${GREEN}$server${NO_COLOR}\n";) &
 done
