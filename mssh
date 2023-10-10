@@ -9,7 +9,7 @@
 # $ curl -sSfL https://raw.githubusercontent.com/rbojan/mssh/main/mssh -o $MSSH_DIR/mssh
 # $ chmod +x $MSSH_DIR/mssh
 
-mssh_file="${MSSH_FILE:-/.mssh}"
+mssh_file="${MSSH_FILE:-.mssh}"
 
 YELLOW='\033[33m'
 GREEN='\033[0;32m'
